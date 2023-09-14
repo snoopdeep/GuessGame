@@ -92,6 +92,6 @@ document.querySelector('.again').addEventListener("click",function(){
 
    document.querySelector('.guess').value='';
    randomGlobal=Math.trunc(Math.random()*20)+1;
-   //console.log(randomGlobal);
+  // console.log(randomGlobal);
    
 })
