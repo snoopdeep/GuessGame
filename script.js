@@ -3,7 +3,7 @@
 // (document.querySelector('.guess').value)=2;
 
 // Generating global random no
-const randomGlobal=Math.trunc(Math.random()*20)+1;
+let randomGlobal=Math.trunc(Math.random()*20)+1;
  console.log(randomGlobal);
 
  // global counter for decreasing score;
@@ -19,9 +19,9 @@ document.querySelector('.check').addEventListener('click',function(){
    // console.log(document.querySelector('.guess').value);
 
 
-// on each click score decreases by one till it match;
-newValue-=1;
-document.querySelector('.score').textContent=newValue;
+// on each click score decreases by one till it match in 2 cases only;
+// newValue-=1;
+// document.querySelector('.score').textContent=newValue;
 // console.log(newValue);
   // console.log(document.querySelector('.score').textContent);
 
@@ -30,15 +30,17 @@ document.querySelector('.score').textContent=newValue;
 // if value match then message text should be change and ? should be replace with actual globalRandomno
    if(randomGlobal===randomLocal){
 
-    document.querySelector('.message').textContent='✨correct number';
+    document.querySelector('.message').textContent='✨Correct Number!';
 
     // changing the ? text according to randomGlobal;
     document.querySelector('.number').textContent=randomGlobal;
 
     // background color of body should change to green
     document.querySelector('body').style.backgroundColor="green";
-    // Highest score will be update be newValue;
-    document.querySelector('.highscore').textContent=newValue;
+    // Highest score will be update be newValue if its greater than current score;
+    //console.log(document.querySelector('.highscore').textContent);
+    if(newValue>document.querySelector('.highscore').textContent)
+       document.querySelector('.highscore').textContent=newValue;
 
    }
 
@@ -46,24 +48,50 @@ document.querySelector('.score').textContent=newValue;
    // score should be dereases 
    // message should be too less;
 
-   if(randomLocal<randomGlobal){
-    document.querySelector('.message').textContent='📉 too low!';
+
+   // if score===newValue is >0 then only do all other wise you lost the game;
+   if(newValue>1){
+    if(randomLocal<randomGlobal){
+        document.querySelector('.message').textContent='📉 Too low!';
+        newValue-=1;
+        document.querySelector('.score').textContent=newValue;
+    
+       }
+       if(randomLocal>randomGlobal){
+        document.querySelector('.message').textContent='📈 Too high!';
+        newValue-=1;
+        document.querySelector('.score').textContent=newValue;
+    
+       }
+       // when no i/p and press button  no number!
+       if(randomLocal===0){
+        document.querySelector('.message').textContent='💀 No number!';
+    
+       }
 
    }
-   if(randomLocal>randomGlobal){
-    document.querySelector('.message').textContent='📈 too high!';
+   if(newValue===0){
+    document.querySelector('.message').textContent='✘ You lost the game!';
 
    }
-   // when no i/p and press button  no number!
-   if(randomLocal===0){
-    document.querySelector('.message').textContent='💀 no number!';
 
-   }
+   
 })
 
 // on clicking Again page should be refresh
 // use location.reload();
 
 document.querySelector('.again').addEventListener("click",function(){
-    location.reload();
+    // this will reload the whole web page but we want highscore to be preserve;
+   // location.reload();
+   document.querySelector('.message').innerHTML='Start guessing...';
+   document.querySelector('.score').innerHTML=20;
+   newValue=20;
+   document.querySelector('.number').textContent='?';
+   document.querySelector('body').style.backgroundColor="#8AAAE5";
+
+   document.querySelector('.guess').value='';
+   randomGlobal=Math.trunc(Math.random()*20)+1;
+   console.log(randomGlobal);
+   
 })
