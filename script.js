@@ -4,7 +4,7 @@
 
 // Generating global random no
 let randomGlobal=Math.trunc(Math.random()*20)+1;
- console.log(randomGlobal);
+ //console.log(randomGlobal);
 
  // global counter for decreasing score;
  let newValue= document.querySelector('.score').textContent;
@@ -92,6 +92,6 @@ document.querySelector('.again').addEventListener("click",function(){
 
    document.querySelector('.guess').value='';
    randomGlobal=Math.trunc(Math.random()*20)+1;
-   console.log(randomGlobal);
+   //console.log(randomGlobal);
    
 })
